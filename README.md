@@ -1,4 +1,4 @@
-# hw1-sofia-nanaki-carline\
+# hw1-sofia-nanaki-carline
 Nanaki
 Sofia
 Carline
