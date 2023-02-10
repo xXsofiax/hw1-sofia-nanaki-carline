@@ -1,0 +1,56 @@
+#form {
+    width: 280px;
+    margin: 0 auto;
+    background-color: #d3d3d3;
+    padding: 20px 50px 40px;
+    box-shadow: 1px 4px 10px 1px #aaa;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: rgb(34, 29, 29);
+    background-image: url('voting.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    padding-top: 12%;
+}
+
+#form * {
+    box-sizing: border-box;
+}
+#form h2{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  #form input {
+    margin-bottom: 15px;
+  }
+  
+  #form input[type=text] {
+    display: block;
+    height: 32px;
+    padding: 6px 16px;
+    width: 100%;
+    border: none;
+    background-color: #f3f3f3;
+  }
+  
+  #feedback-form label {
+    color: #777;
+    font-size: 0.8em;
+  }
+
+  #form [type=submit] {
+    display: block;
+    margin: 0 auto 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    box-shadow: 1px 4px 10px 1px #aaa;
+    background: linear-gradient(to right, #207cca 0%,#fcfcfc 50%,#cc4d36 100%); 
+  }
