@@ -12,6 +12,7 @@ let avg = 0;
 
 // runs after click the submit button
 function readFile() {
+  population = [];
   document.querySelector('#submit').addEventListener('click', read);
 
 }
@@ -36,9 +37,18 @@ function loadArr(info, delimiter) {
     population.push(rowArray);
   }
   // to call other function
-  totalPo();
-  calculateAvg(totalpop, population)
-  calculateReps(population,avg);
+  let choose = confirm("Do you want to use Hamilton's Apportionment Algorithm? \nOr it will be Huntington-Hill Apportionment Algorithm.");
+  if(choose == true){
+    totalPo();
+    calculateAvg(totalpop, population)
+    calculateReps(population,avg);
+    priorityScoreCalc();
+  }
+  else{
+    alert("Huntington-Hill Apportionment Algorithm will been used.");
+    allocateRep();
+  }
+  
 }
 
 //to add all the population together
@@ -49,7 +59,6 @@ function totalPo() {
       
     }
   } 
-  console.log("The total population is "+totalpop);
   return totalpop;
 }
 
@@ -58,7 +67,6 @@ function calculateAvg(totalpop, population) {
   if (population.length > 1) {
     avg = totalpop / numOfRp;
   }
-  console.log("The average of population is "+avg);
   return avg;
 }
 
@@ -117,7 +125,56 @@ function calculateReps(population, avg){
     
   }
   document.getElementById("result").innerHTML = output;
-  console.log(reOrderRm);
-  
-  console.log(population);
 }
+
+
+// to calculate the priority of each states
+function priorityScoreCalc(input,numOfRp){
+    let output = Math.floor(input / Math.sqrt(numOfRp*(numOfRp + 1)))
+    return output;
+}
+
+// to allocate representatives to each 
+function allocateRep(){
+
+    //give each states one representative
+    for(let i=0; i < population.length; i++){
+        if( i == 0){
+            population[i][2]= "Priority";
+            population[i][3]= "Representative";
+        }
+        else{
+            population[i][3] = 1;
+            population[i][2] = priorityScoreCalc(population[i][1],1);
+            
+        }
+    }
+
+    //if we still have extra representative
+    if (numOfRp > population.length){
+        repNYet = numOfRp-population.length;
+        while(repNYet >= 0){
+            let biggest = 0;
+            let biggestID = 0;
+            for(let i = 1; i <population.length;i++){
+                if(population[i][2] > biggest){
+                    biggest = population[i][2];
+                    biggestID = i;
+                }
+            }
+            population[biggestID][3] +=1;
+            repNYet -=1;
+            population[biggestID][2] = priorityScoreCalc(population[biggestID][1],population[biggestID][3]);
+
+        }
+    }
+
+    // print the result in the website
+    let output="";
+    for(let i = 1; i< population.length;i++){
+        output += population[i][0]+"\t"+population[i][3]+"\n";
+    
+    }
+    document.getElementById("result").innerHTML = output;
+    }
+
