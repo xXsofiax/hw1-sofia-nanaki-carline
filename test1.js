@@ -69,7 +69,7 @@ function calculateReps(population, avg){
     if( i == 0){
       population[i][2] = "Divide";
       population[i][3] = "Representative";
-      population[i][4] = "Rmain";
+      population[i][4] = "Rmainer";
     }
     else{
       let reps = population[i][1] / avg;
@@ -84,10 +84,25 @@ function calculateReps(population, avg){
 
   // to find the rep that we not yet given
   repNYet = numOfRp - repHave;
-  for(let i = 1; i< population.length;i++){
-    
+  for(let i = 0; i< population.length;i++){
+    test[i] = population[i].slice(4);
+    test[i] = population[i].slice(4);
   }
-  console.log(repNYet);
+ 
+  while(test.length-1 != reOrderRm.length){
+    let biggest = 0;
+    let biggestID = 0;
+    for(let i = 1; i < test.length; i++){
+      if(test[i] >= biggest){
+        biggest = test[i];
+        biggestID = i;
+      }
+    }
+    test[biggestID] = 0;
+    reOrderRm.push(biggestID);
+  }
+  console.log(reOrderRm);
+  console.log(test);
   console.log(population);
   //console.log(remainder);
 }
