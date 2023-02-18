@@ -1,18 +1,23 @@
-
 'use strict';
 
 let population = [];
 let test = new Array();
+let reOrderRm = [];
 let totalpop = 0;
 let averOfreps;
 let input;
+let numOfRp;
+let repNYet = 0;
+let avg = 0;
 
 function readFile() {
   document.querySelector('#submit').addEventListener('click', read);
+  
 }
 
 function read() {
   let file = document.querySelector('#file').files[0];
+  numOfRp = document.getElementById("reps").value;
   let reader = new FileReader();
   reader.addEventListener('load', function(e) {
     let text = e.target.result;
@@ -30,7 +35,8 @@ function loadArr(info, delimiter) {
   }
   
   totalPo();
-calculateReps(totalpop,population);
+  calculateAvg(totalpop, population)
+  calculateReps(population,avg);
 }
 
 
@@ -46,12 +52,42 @@ function totalPo() {
   return totalpop;
 }
 
-function calculateReps(totalpop, population) {
+function calculateAvg(totalpop, population) {
   // to calculate the average of population
-  let avg = 0;
+
   if (population.length > 1) {
-    avg = totalpop / population.length;
+    avg = totalpop / numOfRp;
   }
   console.log("The average of population is "+avg);
   return avg;
+}
+
+function calculateReps(population, avg){
+  // to find the rep that we already have
+  let repHave = 0;
+  for(let i = 0; i< population.length;i++){
+    if( i == 0){
+      population[i][2] = "Divide";
+      population[i][3] = "Representative";
+      population[i][4] = "Rmain";
+    }
+    else{
+      let reps = population[i][1] / avg;
+      population[i][2] = reps;
+      let roundDown = Math.floor(population[i][2]);
+      population[i][3] = roundDown;
+      repHave += roundDown;
+      let remainder = reps - roundDown;
+      population[i][4] = remainder;
+    }
+  }
+
+  // to find the rep that we not yet given
+  repNYet = numOfRp - repHave;
+  for(let i = 1; i< population.length;i++){
+    
+  }
+  console.log(repNYet);
+  console.log(population);
+  //console.log(remainder);
 }
