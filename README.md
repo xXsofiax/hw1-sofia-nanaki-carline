@@ -8,3 +8,6 @@ This repo is for Assignment 1, where we are creating a webpage that uses Hamilto
 
 
 Final Submission for Hamilton Algorithm pushed at 11:35pm, 02/17/2023
+
+
+Final Submission for Huntington-Hill Algorithm pushed at 11:40pm, 02/17/2023
